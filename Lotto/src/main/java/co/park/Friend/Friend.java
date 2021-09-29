@@ -37,6 +37,8 @@ public abstract class Friend {
 	
 	public abstract void search(Friend[] friends);
 	public abstract void modify();
+	public abstract void showInfo();
+	
 	public String toString() {
 		return "Friend [name=" + name + ", phone=" + phone + ",address " + address + "]";
 	}

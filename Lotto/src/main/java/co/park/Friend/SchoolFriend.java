@@ -11,10 +11,9 @@ public class SchoolFriend extends Friend {
 	}
 
 	public void modify() {
-
 //		  저희가 수정하려는게 뭔지 ?
 //		  번호를 바꿀건지, 주소를 바꿀건지, 학교이름을 바꿀건지를 입력받아서
-//		  eadStr()으로 입력을 받아서
+//		 Str()으로 입력을 받아서
 		this.name = ScanUtil.readStr("바꿀이름을 입력하세요.");
 		this.phone = ScanUtil.readStr("바꿀 전화번호를 입력하세요.");
 		this.address = ScanUtil.readStr("바꿀주소를 입력하세요.");
@@ -39,6 +38,10 @@ public class SchoolFriend extends Friend {
 					}
 				}
 		}
+	}
+	@Override
+	public void showInfo() {
+		System.out.println("이름은 " + name + " 휴대폰번호: " + phone + " 주소: " + address + " 학교이름 : " + school);
 	}
 
 }

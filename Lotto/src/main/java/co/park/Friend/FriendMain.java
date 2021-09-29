@@ -19,9 +19,9 @@ public class FriendMain {
 	}
 
 	public Friend[] friends;
-	OrignalFriend[] orignalfriends = new OrignalFriend[100];
-	SchoolFriend[] schoolFriend = new SchoolFriend[100];
-	CompanyFriend[] companyFriend = new CompanyFriend[100];
+	public OrignalFriend[] orignalfriends = new OrignalFriend[100];
+	public SchoolFriend[] schoolFriend = new SchoolFriend[100];
+	public CompanyFriend[] companyFriend = new CompanyFriend[100];
 
 	private void mainMenu() {
 		System.out.println("=================");
@@ -45,14 +45,14 @@ public class FriendMain {
 
 		if (choice == 1) {
 			for (int i = 0; i < orignalfriends.length; i++) {
-				if (i == 0) {
+				if (orignalfriends == null) {
 					orignalfriends[i] = new OrignalFriend(name, phone, address);
 				}
 			}
 
 		} else if (choice == 2) {
 			for (int i = 0; i < schoolFriend.length; i++) {
-				if (i == 0) {
+				if (schoolFriend[i] == null) {
 					String schoolName = readStr("학교이름을 입력하세요");
 					schoolFriend[i] = new SchoolFriend(name, phone, address, schoolName);
 
@@ -60,7 +60,7 @@ public class FriendMain {
 			}
 		} else if (choice == 3) {
 			for (int i = 0; i < companyFriend.length; i++) {
-				if (i == 0) {
+				if (companyFriend[i] == null) {
 					String companyName = readStr("회사이름을 입력하세요");
 					companyFriend[i] = new CompanyFriend(name, phone, address, companyName);
 				}
@@ -78,54 +78,57 @@ public class FriendMain {
 			for (int i = 0; i < orignalfriends.length; i++) {
 				if (orignalfriends[i] != null)
 					System.out.println("[" + i + "]" + orignalfriends[i].toString());
-				int num = readInt("수정할 친구를 선택하세요.");
-				orignalfriends[num].modify();
-				break;
 			}
+			int num = readInt("수정할 친구번호를 선택하세요.");
+			orignalfriends[num].modify();
 			break;
 		case 2:
 			System.out.println("학교친구수정을 선택하였습니다.");
 			for (int i = 0; i < schoolFriend.length; i++) {
 				if (schoolFriend[i] != null)
 					System.out.println("[" + i + "]" + schoolFriend[i].toString());
-				int num = readInt("수정할 친구를 선택하세요.");
-				schoolFriend[num].modify();
-				break;
 			}
+			int num1 = readInt("수정할 친구번호를 선택하세요.");
+			schoolFriend[num1].modify();
 			break;
 		case 3:
 			System.out.println("직장친구수정을 선택하였습니다.");
 			for (int i = 0; i < companyFriend.length; i++) {
 				if (companyFriend[i] != null)
 					System.out.println("[" + i + "]" + companyFriend[i].toString());
-				int num = readInt("수정할 친구를 선택하세요.");
-				companyFriend[num].modify();
-				break;
 			}
+			int num2 = readInt("수정할 친구번호 선택하세요.");
+			companyFriend[num2].modify();
 			break;
 		}
 		System.out.println("수정완료.");
 	}
 
 	private void searchFriendMenu() {
-		System.out.println("어떤 친구를 찾겠습니까?");
-		System.out.println("1. 일반친구 2.학교친구 3. 직장친구 ");
-		String key = sc.nextLine();
-		if(!key.equals("")) {
-			System.out.println("일반친구조회를 선택하였습니다.");
-			String search =readStr("이름을 입력하세요.");
-			//orignalfriends[searchr].search(orignalfriends);
-			//for문 이용해서 이름으로 equals 배열내에 찾아서 그배열의 번호(index)를 search값으로 넣어서 그안에 있는 모든정보를 showinfo로사용을 해서 보여준다. 
-		}else if(!key.equals("")) {
-			System.out.println("학교친구조회를 선택하였습니다.");
-			int num = readInt("이름을 입력하세요.");
-			schoolFriend[num].search(schoolFriend);
-		}else if(!key.equals("")) {
-			System.out.println("직장친구조회를 선택하였습니다.");
-			int num = readInt("이름을 입력하세요.");
-			companyFriend[num].search(companyFriend);
-		}else {
-			System.out.println("잘못입력하였습니다.");
+		String search = readStr("조회할 친구를 입력하세요");
+		for (int i = 0; i < orignalfriends.length; i++) {
+			while (orignalfriends[i] != null) {
+				if (!search.equals("")) {
+					if (orignalfriends[i].getName().indexOf(search) != -1) {
+						orignalfriends[i].showInfo();
+					}
+				}
+				break;
+			}
+			while (schoolFriend[i] != null) {
+				if (!search.equals("")) {
+					if (schoolFriend[i].getName().indexOf(search) != -1)
+						schoolFriend[i].showInfo();
+				}
+				break;
+			}
+			while (companyFriend[i] != null) {
+				if (!search.equals("")) {
+					if (companyFriend[i].getName().indexOf(search) != -1)
+						companyFriend[i].showInfo();
+				}
+				break;
+			}
 		}
 	}
 
@@ -157,11 +160,6 @@ public class FriendMain {
 		} while (b); // False값으로 설정했을때 b 대신 (!b)로 설정함 - 관례
 	}
 
-	public void run() {
-		dowhileMenu();
-		sc.close();
-	}
-
 	public class ScanUtil {
 
 		public int readInt(String msg) {
@@ -177,4 +175,16 @@ public class FriendMain {
 			return sc.nextLine();
 		}
 	}
+
+	public void run() {
+		orignalfriends[0] = new OrignalFriend("정상수", "1111-1211", "대구광역시");
+		orignalfriends[1] = new OrignalFriend("박정욱", "010-6694-6648", "대구광역시 동구");
+		schoolFriend[0] = new SchoolFriend("정수아", "2222-1211", "서울특별시", "서울대");
+		schoolFriend[1] = new SchoolFriend("서인영", "010-5381-5128", "서울특별시", "중앙대");
+		companyFriend[0] = new CompanyFriend("홍수영", "2222-1311", "광주광역시", "기아자동차");
+		companyFriend[1] = new CompanyFriend("김수현", "010-5315-1754", "경상북도 상주", "상주고등학교");
+		dowhileMenu();
+		sc.close();
+	}
+
 }

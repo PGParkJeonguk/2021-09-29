@@ -15,13 +15,14 @@ public class OrignalFriend extends Friend {
 		for (int i = 0; i < orignalfriends.length; i++) {
 			if (orignalfriends[i] != null)
 				if (!search.equals("")) {
-					if (orignalfriends[i].getName().indexOf(search) != -1);
+					if (orignalfriends[i].getName().indexOf(search) != -1)
+						;
 					System.out.println(orignalfriends[i].toString());
 				} else if (!search.equals("")) {
 					if (orignalfriends[i].getName().indexOf(search) != -1) {
 						System.out.println(orignalfriends[i].toString());
 					}
-				} 
+				}
 		}
 	}
 
@@ -31,6 +32,11 @@ public class OrignalFriend extends Friend {
 		this.address = ScanUtil.readStr("바꿀주소를 입력하세요.");
 	}
 
+	@Override
+	public void showInfo() {
+		System.out.println("이름은 " + name + " 휴대폰번호: " + phone + " 주소: " + address);
+	}
+	
 	public String toString() {
 		return "Friend [name=" + name + ", phone=" + phone + ",address " + address + "]";
 	}
